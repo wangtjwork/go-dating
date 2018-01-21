@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import Map from '../Map'
 
 class MainPage extends Component {
   render() {
     return (
-      <div>Mainpage content</div>
+      <Map places={this.props.places}/>
     )
   }
 }
