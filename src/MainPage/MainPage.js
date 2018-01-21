@@ -7,7 +7,7 @@ class MainPage extends Component {
     return (
       <div>
         <GoogleMap places={ this.props.places } currentID={ this.props.currentID } choosePlace={ this.props.choosePlace }/>
-        <PlacesList places={ this.props.places } currentID={ this.props.currentID } choosePlace={ this.props.choosePlace }/>
+        <PlacesList places={ this.props.places } currentID={ this.props.currentID } choosePlace={ this.props.choosePlace } updateFilter= { this.props.updateFilter }/>
       </div>
     )
   }

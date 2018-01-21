@@ -3,7 +3,8 @@ import './Map.css'
 
 class GoogleMap extends Component {
   state = {
-    markers: new Map()
+    markers: new Map(),
+    map: null
   }
 
   componentDidMount() {
@@ -14,15 +15,49 @@ class GoogleMap extends Component {
 
   // on props change, update the corresponding marker.
   componentDidUpdate() {
-    for (let [_, marker] of this.state.markers) {
+    const markers = this.state.markers;
+    const map = this.state.map;
+    // hide all markers and set icon back to default
+    for (let [, marker] of markers) {
+      marker.setMap(null);
       marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
     }
+    // show only showing places markers
+    console.log(markers);
+    console.log(this.props.places);
+    for (let place of this.props.places) {
+      markers.get(place.id).setMap(map);
+    }
+    // set selected marker to green color
     if (this.props.currentID !== '') {
       this.state.markers.get(this.props.currentID).setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
     }
   }
 
-  // Initialize google map with all markers passed to the component, and giving them a red icon
+  // add all markers passed to the component, and giving them an icon as specified
+  addMarkers = () => {
+    const google = window.google;
+    const map = this.state.map;
+    const places = this.props.places;
+    let bounds = new google.maps.LatLngBounds();
+    for (let place of places) {
+      const marker = new google.maps.Marker({
+        map: map,
+        position: place.latlng,
+        title: place.name,
+        animation: google.maps.Animation.DROP,
+        icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+      });
+      bounds.extend(marker.position);
+      this.state.markers.set(place.id, marker);
+
+      marker.addListener('click', () => this.props.choosePlace(place.id));
+    }
+
+    map.fitBounds(bounds);
+  }
+
+  // Initialize google map
   initMap(self) {
     return function() {
       const google = window.google;
@@ -30,24 +65,8 @@ class GoogleMap extends Component {
         center: { "lat" : 30.627977, "lng" : -96.3344068 },
         zoom: 13
       });
-      const places = self.props.places;
-      let bounds = new google.maps.LatLngBounds();
-      for (let place of places) {
-        const marker = new google.maps.Marker({
-          map: map,
-          position: place.latlng,
-          title: place.name,
-          animation: google.maps.Animation.DROP,
-          icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
-        });
-
-        bounds.extend(marker.position);
-        self.state.markers.set(place.id, marker);
-
-        marker.addListener('click', () => self.props.choosePlace(place.id));
-      }
-
-      map.fitBounds(bounds);
+      self.state.map = map;
+      self.addMarkers();
     }
   }
 
