@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 
 class DetailsPage extends Component {
   render() {
+    console.log(this.props);
     return (
-      <div>{this.props.place[0]}</div>
+      <div>Details</div>
     )
   }
 }
