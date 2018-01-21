@@ -47,7 +47,15 @@ class App extends Component {
         },
         id: "5"
       }
-    ]
+    ],
+    currentID: ''
+  }
+
+  choosePlaceID= (id) => {
+    this.setState({
+      currentID: id
+    });
+    console.log(this.state.currentID);
   }
 
   render() {
@@ -57,7 +65,7 @@ class App extends Component {
           <h1 className="App-title">Where to go Dating?</h1>
         </header>
         <Route exact path="/" render={() => (
-          <MainPage places={ this.state.places }/>
+          <MainPage places={ this.state.places } currentID={ this.state.currentID } choosePlace={this.choosePlaceID}/>
         )} />
         <Route path="/details/:id" component={(whole) => (
           <DetailsPage place={ this.state.places.filter(p => p.id === whole.match.params.id) } />

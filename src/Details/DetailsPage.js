@@ -2,7 +2,11 @@ import React, { Component } from 'react'
 
 class DetailsPage extends Component {
   render() {
-    console.log(this.props);
+    // if (this.props.places.length !== 1) {
+    //   return (
+    //     <CustomErrorPage info='No place with this ID exists, please enter valid number from 1 to 5.'/>
+    //   )
+    // }
     return (
       <div>Details</div>
     )

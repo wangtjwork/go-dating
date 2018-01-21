@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './Map.css'
 
-class Map extends Component {
-  state: {
-    id: '1'
+class GoogleMap extends Component {
+  state = {
+    markers: new Map()
   }
 
   componentDidMount() {
@@ -30,11 +30,33 @@ class Map extends Component {
         });
 
         bounds.extend(marker.position);
+        self.state.markers.set(place.id, marker);
+
+        marker.addListener('click', () => self.props.choosePlace(place.id));
       }
 
       map.fitBounds(bounds);
     }
   }
+
+  makeMarkerIcon(markerColor) {
+    const google = window.google;
+    const markerImage = new google.maps.MarkerImage(
+      'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|'+ markerColor +
+      '|40|_|%E2%80%A2',
+      new google.maps.Size(21, 34),
+      new google.maps.Point(0, 0),
+      new google.maps.Point(10, 34),
+      new google.maps.Size(21,34));
+    return markerImage;
+  }
+
+  componentDidUpdate() {
+    if (this.props.currentID !== '') {
+      this.state.markers.get(this.props.currentID).setIcon(this.makeMarkerIcon('FFFF24'));
+    }
+  }
+
 
   render() {
     return (
@@ -53,4 +75,4 @@ function loadJS(src) {
     ref.parentNode.insertBefore(script, ref);
 }
 
-export default Map
+export default GoogleMap

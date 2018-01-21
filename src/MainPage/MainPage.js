@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
-import Map from '../Map'
+import GoogleMap from '../GoogleMap'
 
 class MainPage extends Component {
   render() {
-    // if (this.props.places.length !== 1) {
-    //   return (
-    //     <CustomErrorPage info='No place with this ID exists, please enter valid number from 1 to 5.'/>
-    //   )
-    // }
     return (
-      <Map places={this.props.places}/>
+      <GoogleMap places={ this.props.places } currentID={ this.props.currentID } choosePlace={ this.props.choosePlace }/>
     )
   }
 }
