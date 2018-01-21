@@ -12,6 +12,17 @@ class GoogleMap extends Component {
     loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyAyDDMW81ZDUAw-o3NqnuygAGojMhJeEjA&v=3&callback=initMap');
   }
 
+  // on props change, update the corresponding marker.
+  componentDidUpdate() {
+    for (let [_, marker] of this.state.markers) {
+      marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
+    }
+    if (this.props.currentID !== '') {
+      this.state.markers.get(this.props.currentID).setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
+    }
+  }
+
+  // Initialize google map with all markers passed to the component, and giving them a red icon
   initMap(self) {
     return function() {
       const google = window.google;
@@ -26,7 +37,8 @@ class GoogleMap extends Component {
           map: map,
           position: place.latlng,
           title: place.name,
-          animation: google.maps.Animation.DROP
+          animation: google.maps.Animation.DROP,
+          icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
         });
 
         bounds.extend(marker.position);
@@ -38,25 +50,6 @@ class GoogleMap extends Component {
       map.fitBounds(bounds);
     }
   }
-
-  makeMarkerIcon(markerColor) {
-    const google = window.google;
-    const markerImage = new google.maps.MarkerImage(
-      'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|'+ markerColor +
-      '|40|_|%E2%80%A2',
-      new google.maps.Size(21, 34),
-      new google.maps.Point(0, 0),
-      new google.maps.Point(10, 34),
-      new google.maps.Size(21,34));
-    return markerImage;
-  }
-
-  componentDidUpdate() {
-    if (this.props.currentID !== '') {
-      this.state.markers.get(this.props.currentID).setIcon(this.makeMarkerIcon('FFFF24'));
-    }
-  }
-
 
   render() {
     return (

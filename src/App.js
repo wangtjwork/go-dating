@@ -51,11 +51,10 @@ class App extends Component {
     currentID: ''
   }
 
-  choosePlaceID= (id) => {
+  choosePlaceID = (id) => {
     this.setState({
       currentID: id
     });
-    console.log(this.state.currentID);
   }
 
   render() {
