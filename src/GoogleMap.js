@@ -23,8 +23,6 @@ class GoogleMap extends Component {
       marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
     }
     // show only showing places markers
-    console.log(markers);
-    console.log(this.props.places);
     for (let place of this.props.places) {
       markers.get(place.id).setMap(map);
     }

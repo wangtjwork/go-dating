@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import MainPage from './MainPage/MainPage.js';
 import DetailsPage from './Details/DetailsPage.js';
 import './App.css';
@@ -80,13 +80,15 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">Where to go Dating?</h1>
+          <Link to="/">
+            <h1 className="App-title">Where to go Dating?</h1>
+          </Link>
         </header>
         <Route exact path="/" render={() => (
           <MainPage places={ showingPlaces } currentID={ this.state.currentID } choosePlace={this.choosePlaceID} updateFilter={ this.updateFilterOption }/>
         )} />
         <Route path="/details/:id" component={(whole) => (
-          <DetailsPage place={ this.state.places.filter(p => p.id === whole.match.params.id) } />
+          <DetailsPage place={ this.state.places.filter(p => p.id === whole.match.params.id) } choosePlace={this.choosePlaceID} />
         )} />
       </div>
     );
