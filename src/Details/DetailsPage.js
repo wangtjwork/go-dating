@@ -69,7 +69,7 @@ class DetailsPage extends Component {
     }
     return (
       <div>
-        <div className="list-head">
+        <div className="details-head">
           <Link to="/" className='return-to-main-page'>Return</Link>
           <h2>{this.props.place[0].name}</h2>
         </div>
@@ -77,14 +77,16 @@ class DetailsPage extends Component {
           {
             this.state.reviews.map((review) => {
               return (
-                <li key={review.id}>
+                <li className="review-item" key={review.id}>
                   {review.text}
                 </li>
               );
             })
           }
         </ul>
-        <GoogleMap places={ this.props.place } currentID={ this.props.place[0].id } choosePlace={ this.props.choosePlace } />
+        <div className="details-map">
+          <GoogleMap places={ this.props.place } currentID={ this.props.place[0].id } choosePlace={ this.props.choosePlace } />
+        </div>
       </div>
     )
   }
