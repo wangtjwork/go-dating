@@ -6,8 +6,8 @@ class PlacesList extends Component {
     return (
       <div>
         <div className="list-head">
-          <h2>Places</h2>
-          <select onChange={ (event) => this.props.updateFilter(event.target.value)}>
+          <h2 className="list-head-text">Places</h2>
+          <select className="list-head-filter" onChange={ (event) => this.props.updateFilter(event.target.value)}>
             <option value="all">All places</option>
             <option value="lessThanFifteen">SPH &lt; 15</option>
             <option value="moreThanFifteen">SPH &ge; 15</option>

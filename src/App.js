@@ -80,9 +80,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <Link to="/">
-            <h1 className="App-title">Where to go Dating?</h1>
-          </Link>
+          <h1 className="App-title">Where to go Dating?</h1>
         </header>
         <Route exact path="/" render={() => (
           <MainPage places={ showingPlaces } currentID={ this.state.currentID } choosePlace={this.choosePlaceID} updateFilter={ this.updateFilterOption }/>

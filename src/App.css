@@ -23,6 +23,42 @@
   font-size: large;
 }
 
+.return-to-main-page {
+  display: block;
+  top: 20px;
+  left: 15px;
+  width: 50px;
+  height: 53px;
+  background: white;
+  background-image: url('./icons/arrow-back.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 28px;
+  font-size: 0;
+}
+
+.list-head {
+  display: flex;
+  justify-content: center;
+  -ms-align-items: center;
+  align-items: center;
+}
+
+.list-head-text {
+  flex-grow: 5;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.list-head-filter {
+  flex-grow: 0;
+  margin-right: 15px;
+}
+
+ul {
+  list-style-type: none;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

@@ -8,9 +8,9 @@ class GoogleMap extends Component {
   }
 
   componentDidMount() {
-    window.initMap = this.initMap(this);
+      window.initMap = this.initMap(this);
 
-    loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyAyDDMW81ZDUAw-o3NqnuygAGojMhJeEjA&v=3&callback=initMap');
+      loadJS('https://maps.googleapis.com/maps/api/js?key=AIzaSyAyDDMW81ZDUAw-o3NqnuygAGojMhJeEjA&v=3&callback=initMap');
   }
 
   // on props change, update the corresponding marker.
@@ -53,6 +53,10 @@ class GoogleMap extends Component {
     }
 
     map.fitBounds(bounds);
+    var listener = google.maps.event.addListener(map, "idle", function() {
+      if (map.getZoom() > 15) map.setZoom(15);
+      google.maps.event.removeListener(listener);
+    });
   }
 
   // Initialize google map
