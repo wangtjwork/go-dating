@@ -17,7 +17,7 @@ class PlacesList extends Component {
           {
             this.props.places.map((place) => (
               <li key={place.id}
-                className={place.id === this.props.currentID ? 'highlight-item' : '' + ' list-text'}
+                className={place.id === this.props.currentID ? 'highlight-item' : ''}
                 onClick={() => this.props.choosePlace(place.id)}
               >
                 <span className="list-text">{place.name}</span>

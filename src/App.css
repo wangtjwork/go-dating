@@ -52,18 +52,31 @@ ul {
 }
 
 ul.places-list > li {
-  display: flex;
-  justify-content: center;
-  -ms-align-items: center;
-  align-items: center;
+  width: 100%;
+  display: inline-grid;
+  grid-template-columns: 1fr repeat(1, auto) 1fr;
+  grid-column-gap: 5px;
+  justify-items: center;
   margin-top: 4px;
-  background-color: #a6dbf4;
+  background-color: #c9e5f2;
   border-radius: 5px;
 }
 
-.list-text {
-  flex-grow: 6;
+ul.places-list > li.highlight-item {
+  background-color: #75c8ef;
 }
+
+.list-text {
+  grid-column-start: 2;
+}
+
+.list-function {
+  margin-left: auto;
+  width: 85px;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
 
 
 @keyframes App-logo-spin {
