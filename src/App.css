@@ -138,4 +138,10 @@ ul {
   .details-map .map {
     height: 350px;
   }
+
+  .return-to-main-page {
+    height: 30px;
+    width: 30px;
+    padding-left: 15px;
+  }
 }
