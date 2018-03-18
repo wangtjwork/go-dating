@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './Map.css'
 
 class GoogleMap extends Component {
   state = {
@@ -65,7 +64,7 @@ class GoogleMap extends Component {
       const google = window.google;
       const map = new google.maps.Map(self.refs.map, {
         center: { "lat" : 30.627977, "lng" : -96.3344068 },
-        zoom: 13
+        zoom: 12
       });
       self.state.map = map;
       self.addMarkers();
